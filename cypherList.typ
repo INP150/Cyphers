@@ -20,8 +20,6 @@
 #T9Cypher(word: "Kdo se taky citi jako boomer.")
 
 
-#import "Helpers/Cyphers/brailleMaskingCypher.typ": generateMaskCombination, rng
-
 = Maskování
 #brailleMaskingCypher(word: "Maska na pleť je super", separator: "      ")
 
