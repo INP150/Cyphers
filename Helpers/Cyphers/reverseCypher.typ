@@ -1,17 +1,6 @@
-#import "/Helpers/common.typ": ALPHABET
+#import "/Helpers/common.typ": ALPHABET, normalize
 
 #let reverseCypher(word: str) = {
-  let out = ()
-
-  for c in word.clusters() {
-    let lc = lower(c)
-    if lc not in ALPHABET {
-      continue
-    }
-
-    let uc = upper(c)
-    out.insert(0, uc)
-  }
-
-  out.join("")
+  set text(13pt)
+  lower(normalize(word: word)).rev().split("").filter(c => c in ALPHABET).join("")
 }

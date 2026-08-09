@@ -1,9 +1,12 @@
-#import "/Helpers/common.typ": ALPHABET, ASCII_A, toBinary
+#import "/Helpers/common.typ": ALPHABET, ASCII_A, normalize, toBinary
 
 #let binaryCypher(word: str) = {
-  let out = ()
+  set text(13pt)
 
-  for c in word.clusters() {
+  let out = ()
+  let normalizedWord = normalize(word: word)
+
+  for c in normalizedWord.clusters() {
     let lc = lower(c)
     if lc not in ALPHABET {
       continue
