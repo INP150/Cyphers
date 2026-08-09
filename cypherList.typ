@@ -1,37 +1,33 @@
 #import "/Helpers/importer.typ": (
-  binaryCypher, braileSubstractionCypher, caesarCypher, keyboardCypher, morseCypher, multiplicationCypher,
-  reverseCypher,
+  T9Cypher, binaryCypher, brailleMaskingCypher, caesarCypher, keyboardCypher, morseCypher, reverseCypher,
 )
 
-= Keyboard Cypher
+#set text(11pt)
 
-#keyboardCypher(word: "hi my name is John.")
-
-= Caesar Cypher
-
-#caesarCypher(word: "hi my name is John.", shift: 1)
+= Pravý skaut
+#morseCypher(word: "Skautský šátek je nejlepší šátek")
 
 
-= Math Cypher
+= Tennet
+#reverseCypher(word: "Zpátky do budoucnosti je banger film")
 
-#multiplicationCypher(word: "hi my name is John.")
 
-= Morse Cypher
+= Řecký salát
+#caesarCypher(word: "Přišel jsem, viděl jsem, zvítězil jsem.", shift: 1)
 
-#morseCypher(word: "hi my name is John.")
 
-= Math cypher
+= Mileniál
+#T9Cypher(word: "Kdo se taky citi jako boomer.")
 
-#multiplicationCypher(word: "hi my name is John.")
 
-= Braile Cypher
+#import "Helpers/Cyphers/brailleMaskingCypher.typ": generateMaskCombination, rng
 
-//#braileSubstractionCypher(word: "hi my name is John.")
+= Maskování
+#brailleMaskingCypher(word: "Maska na pleť je super", separator: "      ")
 
-= Reverse Cypher
+= Opičí psaní
+#keyboardCypher(word: "Psaní všemi deseti je náročné ale stojí to za to")
 
-#reverseCypher(word: "hi my name is John.")
 
-= Binary Cypher
-
-#binaryCypher(word: "hi my name is John.")
+= Dvojitý pokec
+#binaryCypher(word: "Píp píp, já jsem počítač")
