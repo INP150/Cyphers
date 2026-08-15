@@ -29,5 +29,5 @@
 #keyboardCypher(word: "Psaní všemi deseti je náročné ale stojí to za to")
 
 
-= Dvojitý pokec
-#binaryCypher(word: "Píp píp, já jsem počítač")
+//= Dvojitý pokec
+//#binaryCypher(word: "Píp píp, já jsem počítač")
