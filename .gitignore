@@ -1,0 +1,5 @@
+# dont track generated files
+*.pdf
+
+# Files to be tracked in the future
+cheatSheet*
