@@ -1,9 +1,9 @@
-#import "/Helpers/common.typ": ALPHABET, ASCII_A, LETTERS_IN_ALPHABET, normalize
+#import "/Helpers/common.typ": ALPHABET, ASCII_A, LETTERS_IN_ALPHABET, remove_diacritics
 
 #let caesarCypher(word: str, shift: int) = {
   set text(13pt)
   let out = ()
-  let normalizedWord = normalize(word: word)
+  let normalizedWord = lower(remove_diacritics(word: word))
 
   for c in normalizedWord.clusters() {
     let lc = lower(c)

@@ -1,10 +1,10 @@
-#import "/Helpers/common.typ": ALPHABET, ASCII_A, normalize, toBinary
+#import "/Helpers/common.typ": ALPHABET, ASCII_A, remove_diacritics, toBinary
 
 #let binaryCypher(word: str) = {
   set text(13pt)
 
   let out = ()
-  let normalizedWord = normalize(word: word)
+  let normalizedWord = remove_diacritics(word: word)
 
   for c in normalizedWord.clusters() {
     let lc = lower(c)

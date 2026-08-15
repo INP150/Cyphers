@@ -1,8 +1,9 @@
 #import "/Helpers/maps.typ": mathMap
-#import "/Helpers/common.typ": simpleTranslation
+#import "/Helpers/common.typ": remove_diacritics, simpleTranslation
 
 
 #let T9Cypher(word: str) = {
   set text(13pt)
-  simpleTranslation(word: word, separator: " ", table: mathMap)
+  let cleanedWord = lower(remove_diacritics(word: word))
+  simpleTranslation(word: cleanedWord, separator: " ", table: mathMap)
 }

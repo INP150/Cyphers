@@ -19,9 +19,11 @@
 = Mileniál
 #T9Cypher(word: "Kdo se taky citi jako boomer.")
 
+#import "Helpers/Cyphers/brailleMaskingCypher.typ": generateMaskCombination
 
 = Maskování
-#brailleMaskingCypher(word: "Maska na pleť je super", separator: "      ")
+#brailleMaskingCypher(word: "Maska na pleť je super", seed: 52, separator: "      ")
+
 
 = Opičí psaní
 #keyboardCypher(word: "Psaní všemi deseti je náročné ale stojí to za to")

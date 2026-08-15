@@ -1,4 +1,4 @@
-#import "maps.typ": normalizationMap
+#import "maps.typ": diacriticsMap
 
 // Variables
 #let ALPHABET = "abcdefghijklmnopqrstuvwxyz"
@@ -22,42 +22,17 @@
   out
 }
 
-#let pseudoRandom(i: int, n: int) = {
-  mod(val: rng(i: i), mod: n)
-}
-
 #let rng(i: int) = {
-  let index = calc.floor(i * LETTERS_IN_ALPHABET)
   mod(val: (i * 9301 + 49297), mod: 233280)
 }
 
 
-#let normalize(word: str) = {
-  let normalizedWord = ""
-
-  for c in word.clusters() {
-    normalizedWord += normalizationMap.at(c, default: c)
-  }
-
-  normalizedWord
+#let remove_diacritics(word: str) = {
+  word.clusters().map(c => diacriticsMap.at(c, default: c)).join("")
 }
 
 #let simpleTranslation(word: str, separator: str, table: dictionary) = {
-  let out = ()
-  let normalizedWord = normalize(word: word)
-
-  for c in normalizedWord.clusters() {
-    let lc = lower(c)
-    let translation = table.at(lc, default: lc)
-
-    if (translation == "") {
-      continue
-    }
-
-    out.push(translation)
-  }
-
-  out.join(separator)
+  word.clusters().map(c => table.at(c, default: c)).filter(x => x != "").join(separator)
 }
 
 #let return_nth_bit(val: int, n: int) = {

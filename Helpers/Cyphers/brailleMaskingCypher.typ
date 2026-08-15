@@ -1,4 +1,4 @@
-#import "/Helpers/common.typ": ALPHABET, FAILED_BRAILE, LETTERS_IN_ALPHABET, mod, normalize, rng
+#import "/Helpers/common.typ": ALPHABET, FAILED_BRAILE, LETTERS_IN_ALPHABET, mod, remove_diacritics, rng
 #import "/Helpers/maps.typ": fromBraileMap, toBraileMap
 
 // returns braille overlap of two inputed characters
@@ -14,7 +14,7 @@
 // if no combination is found, it returns the inputed character
 #let generateMaskCombination(char: str, seed: int, tries: int) = {
   for i in range(tries) {
-    let index = mod(val: rng(i: seed) + i, mod: LETTERS_IN_ALPHABET)
+    let index = mod(val: rng(i: seed + i), mod: LETTERS_IN_ALPHABET)
     let firstChar = ALPHABET.at(index)
     let brailleFirst = toBraileMap.at(firstChar, default: FAILED_BRAILE)
 
@@ -23,7 +23,7 @@
     }
 
     for i in range(LETTERS_IN_ALPHABET) {
-      let secondIndex = mod(val: index + i + 1, mod: LETTERS_IN_ALPHABET)
+      let secondIndex = mod(val: rng(i: seed + i), mod: LETTERS_IN_ALPHABET)
       let secondChar = ALPHABET.at(secondIndex)
 
       let brailleSecond = toBraileMap.at(secondChar, default: FAILED_BRAILE)
@@ -34,7 +34,8 @@
 
       // 50% chance of skipping the combination to add some randomness
       let braileIndex
-      let isMasked = mod(val: rng(i: seed) + i, mod: 2) == 0
+      let isMasked = mod(val: rng(i: seed + i), mod: 2) == 0
+
       if isMasked {
         braileIndex = "(" + maskBraille(a: brailleFirst, b: brailleSecond).map(x => (str)(x)).join(", ") + ")"
       } else {
@@ -54,17 +55,17 @@
   return upper(char)
 }
 
-#let brailleMaskingCypher(word: str, separator: str) = {
+#let brailleMaskingCypher(word: str, seed: int, separator: str) = {
   set text(13pt)
 
   let out = ()
-  let seed = 52
-  let normalizedWord = lower(normalize(word: word)).split("").map(c => if c in ALPHABET { c } else { "" }).join("")
+  let normalizedWord = lower(remove_diacritics(word: word)).clusters().filter(c => c in ALPHABET).join()
 
-  // retarded workaround
-  for index in range(normalizedWord.len()) {
-    let c = normalizedWord.at(index)
-    out.push(generateMaskCombination(char: c, seed: seed, tries: LETTERS_IN_ALPHABET))
+  for i in range(normalizedWord.len()) {
+    let c = normalizedWord.at(i)
+    let combination = generateMaskCombination(char: c, seed: seed + i, tries: 26)
+    out.push(combination)
   }
+
   out.join(separator)
 }

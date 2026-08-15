@@ -186,7 +186,7 @@
   "(1, 0, 0, 1, 1, 1)": "z",
 )
 
-#let normalizationMap = (
+#let diacriticsMap = (
   "á": "a",
   "č": "c",
   "ď": "d",
