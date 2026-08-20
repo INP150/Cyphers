@@ -13,8 +13,8 @@
     }
 
     let num = str.to-unicode(lc) - ASCII_A
-    let binary = toBinary(val: num)
-    out.insert(0, binary)
+    let binary = toBinary(val: num, bit_len: 5)
+    out.push(binary)
   }
 
   out.join("\n")

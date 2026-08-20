@@ -39,10 +39,10 @@
   (int)(mod(val: val, mod: pow(val: 2, pow: BIT_LEN - n)) / pow(val: 2, pow: n))
 }
 
-#let toBinary(val: int) = {
+#let toBinary(val: int, bit_len: int) = {
   let out = ()
 
-  for i in range(8) {
+  for i in range(bit_len) {
     let bit = return_nth_bit(val: val, n: i)
     let ascii_val = mod(val: bit + ASCII_0, mod: 2)
     out.insert(0, (str)(ascii_val))
